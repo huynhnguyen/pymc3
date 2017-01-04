@@ -87,7 +87,7 @@ def _join_global_RVs(global_RVs, global_order):
         uw_global = tt.vector('uw_global')
         uw_global.tag.test_value = np.concatenate(
             [joined_global.tag.test_value, joined_global.tag.test_value]
-        )
+        ).astype(theano.config.floatX)
 
         inarray_global = joined_global.type('inarray_global')
         inarray_global.tag.test_value = joined_global.tag.test_value
@@ -110,7 +110,7 @@ def _join_local_RVs(local_RVs, local_order):
         joined_local = tt.concatenate([v.ravel() for v in local_RVs])
         uw_local = tt.vector('uw_local')
         uw_local.tag.test_value = np.concatenate([joined_local.tag.test_value,
-                                                  joined_local.tag.test_value])
+                                                  joined_local.tag.test_value]).astype(theano.config.floatX)
 
         inarray_local = joined_local.type('inarray_local')
         inarray_local.tag.test_value = joined_local.tag.test_value
